@@ -26,11 +26,11 @@ class PokemonAPI:
         res = requests.get(f"{self.base_url}/{poke_name}")
         if res.ok:
             return res.json()
-        return f"{poke_name} isn't a pokemon!"
+        return
 
     def get_pokemon(self, pokemon_name):
         data = self.__get(pokemon_name)
-        if pokemon_name in data:
+        if not data:
             return f"{pokemon_name.title()} isn't a pokémon!"
         else:
             name = data['name']
