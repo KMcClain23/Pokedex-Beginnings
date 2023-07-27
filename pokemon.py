@@ -7,9 +7,10 @@ class Pokemon:
         self.weight=weight
 
     def __str__(self):
-        output = f"----{self.name.title()}----\n"
-        output += f"Height: {self.height}\n"
-        output += f"Weight: {self.weight} \n"
+        print("")
+        output = f"       {self.name.title()}       \n"
+        output += f"       Height: {self.height}       \n"
+        output += f"       Weight: {self.weight}       \n"
         return output
     
     def __repr__(self):
@@ -22,7 +23,6 @@ class PokemonAPI:
 
     
     def __get(self, poke_name):
-
         res = requests.get(f"{self.base_url}/{poke_name}")
         if res.ok:
             return res.json()
@@ -39,7 +39,16 @@ class PokemonAPI:
             new_pokemon = Pokemon(name,height,weight)
             return new_pokemon
        
-        
+print("++=====++" *4)        
+
 pokemon1 = PokemonAPI()
-new = pokemon1.get_pokemon('pikapoo')
+new = pokemon1.get_pokemon('squirtle')
 print(new)
+
+print("++=====++" *4)
+
+pokemon2 = PokemonAPI()
+new2 = pokemon2.get_pokemon('squirty')
+print(new2)
+
+print("++=====++" *4)
