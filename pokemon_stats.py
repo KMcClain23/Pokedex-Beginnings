@@ -39,16 +39,16 @@ class PokemonAPI:
             new_pokemon = Pokemon(name,height,weight)
             return new_pokemon
        
-print("+++=====" *5)        
+print("++=====++" *4)        
 
 pokemon1 = PokemonAPI()
 new = pokemon1.get_pokemon('squirtle')
 print(new)
 
-print("+++=====" *5)
+print("++=====++" *4)
 
 pokemon2 = PokemonAPI()
 new2 = pokemon2.get_pokemon('squirty')
 print(new2)
 
-print("+++=====" *5)
+print("++=====++" *4)
