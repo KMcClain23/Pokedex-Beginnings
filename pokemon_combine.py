@@ -2,6 +2,7 @@ import requests
 import os
 from IPython.display import Image, display
 
+
 class Pokemon:
     def __init__(self, name, height, weight, types, sprite, color, habitat, shape, flavor, dex_counter):
         self.name = name
@@ -17,10 +18,10 @@ class Pokemon:
 
     def __str__(self):
         output = f"{self.name.title()}       \n"
-        output += f"Height: {self.height} inches       \n"
-        output += f"Weight: {self.weight} pounds       \n"
+        output += f"Height: {self.height:.2f} inches       \n"
+        output += f"Weight: {self.weight:.2f} pounds       \n"
         output += f"Type(s): {', '.join(self.types)}       \n"
-        output += f"Sprite {self.sprite}           \n"
+        # output += f"Sprite {self.sprite}           \n"
         output += f"Color: {self.color.title()}       \n"
         output += f"Habitat: {self.habitat.title()}       \n"
         output += f"Shape: {self.shape.title()}       \n"
