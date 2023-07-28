@@ -1,16 +1,18 @@
 import requests
 
 class Pokemon:
-    def __init__(self, name, height, weight):
-        self.name=name
-        self.height=height
-        self.weight=weight
+    def __init__(self, name, height, weight, base_xp):
+        self.name = name
+        self.height = height
+        self.weight = weight
+        self.base_xp = base_xp
 
     def __str__(self):
-        print("")
         output = f"       {self.name.title()}       \n"
         output += f"       Height: {self.height}       \n"
         output += f"       Weight: {self.weight}       \n"
+        output += f"       Base XP: {self.base_xp}       \n"
+
         return output
     
     def __repr__(self):
@@ -31,12 +33,15 @@ class PokemonAPI:
     def get_pokemon(self, pokemon_name):
         data = self.__get(pokemon_name)
         if not data:
-            return f"{pokemon_name.title()} isn't a pokémon!"
+            return f"{pokemon_name.title()} isn't a pokémon! Silly!"
         else:
+            print("")
             name = data['name']
             height = data['height']
             weight = data['weight']
-            new_pokemon = Pokemon(name,height,weight)
+            base_xp = data['base_experience']
+
+            new_pokemon = Pokemon(name,height,weight, base_xp)
             return new_pokemon
        
 print("++=====++" *4)        
