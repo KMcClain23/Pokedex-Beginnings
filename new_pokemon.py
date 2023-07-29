@@ -1,6 +1,7 @@
 import requests
 import os
-from IPython.display import Image, display
+from PIL import Image
+from io import BytesIO
 
 
 class Pokemon:
@@ -77,17 +78,46 @@ class SpeciesAPI:
 
         new_pokemon = Pokemon(name, height, weight, types, sprite, color, habitat, shape, flavor, dex_counter)
         return new_pokemon
+    
+def display_pokemon_image(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
 
-os.system("cls" if os.name == "nt" else "clear")
-pokemon_name = input("Please choose a POKéMON and I will provide some stats and useful information. :)\n\n ")
-os.system("cls" if os.name == "nt" else "clear")
+        # Open the image using Pillow and convert it to RGB mode
+        image = Image.open(BytesIO(response.content)).convert('RGB')
+        image.show()
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching the image: {e}")
+    except Exception as e:
+        print(f"Error displaying the image: {e}")
 
-pokemon1 = SpeciesAPI()
-new = pokemon1.get_pokemon(pokemon_name)
-output = str(new)
+def main():
+    while True:
+        os.system("cls" if os.name == "nt" else "clear")
+        pokemon_name = input("Please choose a POKéMON name or Pokedex number and I will provide some stats and useful information.\n Currently 386 available in the Pokedex. :)\n\n ")
 
-print("++=====++" * 4) 
-if new.sprite:
-    display(Image(url=new.sprite))       
-print(output)
-print("++=====++" * 4)
+        if not pokemon_name:
+            break
+
+        pokemon1 = SpeciesAPI()
+        new = pokemon1.get_pokemon(pokemon_name)
+        output = str(new)
+
+        os.system("cls" if os.name == "nt" else "clear")
+        print("++=====++" * 4)
+        print()
+        if new.sprite:
+            display_pokemon_image(new.sprite)
+        print(output)
+        print("++=====++" * 4)
+
+        search_again = input("Would you like to search for another POKéMON? (y/n): ").lower()
+        if search_again != 'y':
+            os.system("cls" if os.name == "nt" else "clear")
+            print("Hope you had fun!")
+            break
+
+if __name__ == "__main__":
+    
+    main()
