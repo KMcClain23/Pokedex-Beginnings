@@ -49,7 +49,7 @@ class PokemonAPI:
             types = [data['types'][0]['type']['name']]
             if len(data['types']) > 1:
                 types.append(data['types'][1]['type']['name'])
-            sprite = data['sprites']['front_shiny']
+            sprite = data['sprites']['front_default']
             return name, height, weight, tuple(types), sprite
         return None, None, None, None
 
